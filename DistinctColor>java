@@ -1,0 +1,49 @@
+import java.util.*;
+
+class Solution {
+    public int[] queryResults(int limit, int[][] queries) {
+        Map<Integer, Integer> ballColors = new HashMap<>(); // Maps ball index to color
+        Set<Integer> uniqueColors = new HashSet<>(); // Stores unique colors
+        int[] result = new int[queries.length];
+        
+        for (int i = 0; i < queries.length; i++) {
+            int ball = queries[i][0];
+            int color = queries[i][1];
+            
+            // If the ball was already colored, remove the old color
+            if (ballColors.containsKey(ball)) {
+                int oldColor = ballColors.get(ball);
+                ballColors.put(ball, color);
+                
+                // Check if the old color is still in use
+                if (!ballColors.containsValue(oldColor)) {
+                    uniqueColors.remove(oldColor);
+                }
+            } else {
+                ballColors.put(ball, color);
+            }
+            
+            uniqueColors.add(color);
+            result[i] = uniqueColors.size();
+        }
+        
+        return result;
+    }
+}
+/*
+You are given an integer limit and a 2D array queries of size n x 2.
+
+There are limit + 1 balls with distinct labels in the range [0, limit]. Initially, all balls are uncolored. For every query in queries that is of the form [x, y], you mark ball x with the color y. After each query, you need to find the number of distinct colors among the balls.
+
+Return an array result of length n, where result[i] denotes the number of distinct colors after ith query.
+
+Note that when answering a query, lack of a color will not be considered as a color.
+
+ 
+
+Example 1:
+
+Input: limit = 4, queries = [[1,4],[2,5],[1,3],[3,4]]
+
+Output: [1,2,2,3]
+*/
