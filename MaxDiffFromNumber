@@ -1,0 +1,85 @@
+class Solution {
+    public int maxDiff(int num) {
+        String numStr = Integer.toString(num);
+        
+        // ===== Maximize (replace a digit with 9) =====
+        // Find the first digit that is not 9
+        char[] maxChars = numStr.toCharArray();
+        char toReplaceMax = 0;
+        for (char c : maxChars) {
+            if (c != '9') {
+                toReplaceMax = c;
+                break;
+            }
+        }
+        if (toReplaceMax != 0) {
+            for (int i = 0; i < maxChars.length; i++) {
+                if (maxChars[i] == toReplaceMax) {
+                    maxChars[i] = '9';
+                }
+            }
+        }
+        int maxNum = Integer.parseInt(new String(maxChars));
+        
+        // ===== Minimize (replace a digit with 0 or 1) =====
+        char[] minChars = numStr.toCharArray();
+        char toReplaceMin = 0;
+        char replaceWith = 0;
+        if (minChars[0] != '1') {
+            // Replace the first digit with 1
+            toReplaceMin = minChars[0];
+            replaceWith = '1';
+        } else {
+            // Replace the first digit not 0 or 1 with 0
+            for (char c : minChars) {
+                if (c != '0' && c != '1') {
+                    toReplaceMin = c;
+                    replaceWith = '0';
+                    break;
+                }
+            }
+        }
+        if (toReplaceMin != 0) {
+            for (int i = 0; i < minChars.length; i++) {
+                if (minChars[i] == toReplaceMin) {
+                    minChars[i] = replaceWith;
+                }
+            }
+        }
+        int minNum = Integer.parseInt(new String(minChars));
+        
+        return maxNum - minNum;
+    }
+}
+/*
+
+You are given an integer num. You will apply the following steps to num two separate times:
+
+Pick a digit x (0 <= x <= 9).
+Pick another digit y (0 <= y <= 9). Note y can be equal to x.
+Replace all the occurrences of x in the decimal representation of num by y.
+Let a and b be the two results from applying the operation to num independently.
+
+Return the max difference between a and b.
+
+Note that neither a nor b may have any leading zeros, and must not be 0.
+
+ 
+
+Example 1:
+
+Input: num = 555
+Output: 888
+Explanation: The first time pick x = 5 and y = 9 and store the new integer in a.
+The second time pick x = 5 and y = 1 and store the new integer in b.
+We have now a = 999 and b = 111 and max difference = 888
+Example 2:
+
+Input: num = 9
+Output: 8
+Explanation: The first time pick x = 9 and y = 9 and store the new integer in a.
+The second time pick x = 9 and y = 1 and store the new integer in b.
+We have now a = 9 and b = 1 and max difference = 8
+ 
+
+*/
