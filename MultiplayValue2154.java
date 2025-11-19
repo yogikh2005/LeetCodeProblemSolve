@@ -38,16 +38,37 @@ Constraints:
 1 <= nums.length <= 1000
 1 <= nums[i], original <= 1000
 */
-class Solution {
-    public int findFinalValue(int[] nums, int original) {
-    
+cclass Solution {
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+
+    public static int findFinalValue(int[] nums, int original) {
+        boolean flag=true;
+        
+        while(flag){
+       // { 8,19,4,2,15,3  -2
         for(int i=0;i<nums.length;i++)
         {   
             if(original==nums[i])
             {
                 original=nums[i]*2;
+                break;
             }
+            else
+            {
+                if(i==nums.length-1)
+                {
+                 flag=false;
+            
+                }
+            }
+        
+        }
+        
         }
         return original;
     }
+
+ 
 }
