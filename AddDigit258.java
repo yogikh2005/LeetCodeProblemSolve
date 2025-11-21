@@ -1,4 +1,4 @@
-class Solution {
+class AddDigit258 {
     public int addDigits(int num) {
     
       if(num == 0)
