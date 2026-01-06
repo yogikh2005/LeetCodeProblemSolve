@@ -1,6 +1,6 @@
 class Solution {
     public ListNode insertGreatestCommonDivisors(ListNode head) {
-        ListNode curr = head;
+        ListNode curr = head; 
 
         while (curr != null && curr.next != null) {
             int gcdValue = gcd(curr.val, curr.next.val);
